@@ -16,20 +16,31 @@ class App extends React.Component {
           currentlyPlaying: clickedData
         });
   }
-  componentDidMount(){
+
+  onUserSearch(query){
    var searchCallback = (data) =>{
       this.setState({
         currentlyPlaying: data.items[0],
         allVideos: data.items,
       });
     };
-    searchYouTube({q:"foundry sf",key:'AIzaSyDg8iGu9PzQXz8VT0H2U7QkSqZ225rdrLE',maxResults:10}, searchCallback);
+    searchYouTube({q:query,key:'AIzaSyDg8iGu9PzQXz8VT0H2U7QkSqZ225rdrLE',maxResults:10}, searchCallback); 
   }
+
+  // componentDidMount(){
+  //  var searchCallback = (data) =>{
+  //     this.setState({
+  //       currentlyPlaying: data.items[0],
+  //       allVideos: data.items,
+  //     });
+  //   };
+  //   searchYouTube({q:"mexico city!",key:'AIzaSyDg8iGu9PzQXz8VT0H2U7QkSqZ225rdrLE',maxResults:10}, searchCallback);
+  // }
 
   render(){
     return (
     <div>
-      <Nav />
+      <Nav onUserSearch = {this.onUserSearch.bind(this)}/>
       <div className="col-md-7">
         <VideoPlayer data={this.state.currentlyPlaying} />
       </div>
@@ -40,20 +51,5 @@ class App extends React.Component {
       );
   }
 }
-
-
-
-
-// var App = () => (
-//   <div>
-//     <Nav />
-//     <div className="col-md-7">
-//       <VideoPlayer data={exampleVideoData[0]}/>
-//     </div>
-//     <div className="col-md-5">
-//       <VideoList data={exampleVideoData}/>
-//     </div>
-//   </div>
-// );
 
 ReactDOM.render(<App />, document.getElementById('app'));

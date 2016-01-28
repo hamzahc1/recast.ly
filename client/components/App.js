@@ -3,17 +3,22 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      currentlyPlaying: exampleVideoData[0],
-      allVideos: exampleVideoData};
+      currentlyPlaying: this.props.videoList[this.props.startingIndex],
+      allVideos: this.props.videoList};
   }
-  onListEntryClick(){
-    this.setState({
-      currentlyPlaying: exampleVideoData[1]
-    });
-    // console.log(props);
-    // console.log(this.props);
+  onListEntryClick(event){
+    console.log(event.target.innerHTML);
+    for(var i = 0; i < this.props.videoList.length; i++) {
+      if(this.props.videoList[i].snippet.title === event.target.innerHTML){
+        this.setState({
+          currentlyPlaying: this.props.videoList[i]
+        });
+        
+      }
+    }
+
+
   }
-  //On click method
 
   render(){
     return (
@@ -45,4 +50,4 @@ class App extends React.Component {
 //   </div>
 // );
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App videoList={exampleVideoData} startingIndex={0}/>, document.getElementById('app'));

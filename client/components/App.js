@@ -6,18 +6,10 @@ class App extends React.Component {
       currentlyPlaying: this.props.videoList[this.props.startingIndex],
       allVideos: this.props.videoList};
   }
-  onListEntryClick(event){
-    console.log(event.target.innerHTML);
-    for(var i = 0; i < this.props.videoList.length; i++) {
-      if(this.props.videoList[i].snippet.title === event.target.innerHTML){
+  onListEntryClick(clickedData){
         this.setState({
-          currentlyPlaying: this.props.videoList[i]
+          currentlyPlaying: clickedData
         });
-        
-      }
-    }
-
-
   }
 
   render(){

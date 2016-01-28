@@ -1,15 +1,29 @@
+// var startData = searchYouTube({
+// q:"england vs mexico football",
+// key:'AIzaSyDg8iGu9PzQXz8VT0H2U7QkSqZ225rdrLE',
+// maxResults:10
+// });
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      currentlyPlaying: this.props.videoList[this.props.startingIndex],
-      allVideos: this.props.videoList};
+      currentlyPlaying: exampleVideoData[0],
+      allVideos: []};
   }
   onListEntryClick(clickedData){
         this.setState({
           currentlyPlaying: clickedData
         });
+  }
+  componentDidMount(){
+   var searchCallback = (data) =>{
+      this.setState({
+        currentlyPlaying: data.items[0],
+        allVideos: data.items,
+      });
+    };
+    searchYouTube({q:"foundry sf",key:'AIzaSyDg8iGu9PzQXz8VT0H2U7QkSqZ225rdrLE',maxResults:10}, searchCallback);
   }
 
   render(){
@@ -42,4 +56,4 @@ class App extends React.Component {
 //   </div>
 // );
 
-ReactDOM.render(<App videoList={exampleVideoData} startingIndex={0}/>, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));

@@ -1,14 +1,8 @@
-// var startData = searchYouTube({
-// q:"england vs mexico football",
-// key:'AIzaSyDg8iGu9PzQXz8VT0H2U7QkSqZ225rdrLE',
-// maxResults:10
-// });
-
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      currentlyPlaying: exampleVideoData[0],
+      currentlyPlaying: null,
       allVideos: []};
   }
   onListEntryClick(clickedData){
@@ -20,22 +14,22 @@ class App extends React.Component {
   onUserSearch(query){
    var searchCallback = (data) =>{
       this.setState({
+        //Only update the allVideos list so that user can keep watching their selected video and we only reload the videolist 
+        allVideos: data.items,
+      });
+    };
+    searchYouTube({q:query,key: window.YOUTUBE_API_KEY, maxResults:10}, searchCallback); 
+  }
+
+  componentDidMount(){
+   var searchCallback = (data) =>{
+      this.setState({
         currentlyPlaying: data.items[0],
         allVideos: data.items,
       });
     };
-    searchYouTube({q:query,key:'AIzaSyDg8iGu9PzQXz8VT0H2U7QkSqZ225rdrLE',maxResults:10}, searchCallback); 
+    // searchYouTube({q:"mexico city!",key:window.YOUTUBE_API_KEY,maxResults:10}, searchCallback);
   }
-
-  // componentDidMount(){
-  //  var searchCallback = (data) =>{
-  //     this.setState({
-  //       currentlyPlaying: data.items[0],
-  //       allVideos: data.items,
-  //     });
-  //   };
-  //   searchYouTube({q:"mexico city!",key:'AIzaSyDg8iGu9PzQXz8VT0H2U7QkSqZ225rdrLE',maxResults:10}, searchCallback);
-  // }
 
   render(){
     return (

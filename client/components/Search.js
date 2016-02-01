@@ -1,7 +1,7 @@
 var Search = (props) => (
   <div className="search-bar form-inline">
     <input className="form-control" type="text" onChange ={
-      _.debounce(function(event){
+      _.debounce((event) => {
         props.userSearch(event.target.value);
         }, 500)
       } />

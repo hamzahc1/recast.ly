@@ -1,2 +1,3 @@
 #recast.ly
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
+
+Recastly is a React application that uses Youtube's API to search and load the top 5 videos related to the search. 
